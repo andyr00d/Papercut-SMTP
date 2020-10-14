@@ -23,7 +23,7 @@
   "IPCommUIPort_Description": "## The IP Comm UI listening port (Defaults to 37402).",
   "MessagePath": "%DataDirectory%\\Incoming;%BaseDirectory%\\Incoming",
   "MessagePath_Description": "## Base path where incoming emails are written.",
-  "Port": "25",
+  "Port": "26",
   "Port_Description": "## SMTP Server listening Port. Default is 25.",
   "SeqEndpoint": null,
   "SeqEndpoint_Description": "## Populate with a endpoint if you want to enable SEQ (https://getseq.net/) logging."
