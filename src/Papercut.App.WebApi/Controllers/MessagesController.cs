@@ -143,6 +143,25 @@ namespace Papercut.App.WebApi.Controllers
         }
 
         [HttpGet]
+        public HttpResponseMessage Preview(string messageId)
+        {
+            var messageEntry = this._messageRepository.LoadMessages().FirstOrDefault(msg => msg.Name == messageId);
+            if (messageEntry == null)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            var response = this.Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StreamContent(File.OpenRead(messageEntry.File));
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue(DispositionTypeNames.Attachment)
+            {
+                FileName = Uri.EscapeDataString(messageId)
+            };
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("message/rfc822");
+            return response;
+        }
+
+        [HttpGet]
         public HttpResponseMessage DownloadRaw(string messageId)
         {
             var messageEntry = this._messageRepository.LoadMessages().FirstOrDefault(msg => msg.Name == messageId);

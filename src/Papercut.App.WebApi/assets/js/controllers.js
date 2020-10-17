@@ -88,6 +88,27 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
         $scope.refresh();
     };
 
+    $scope.getMailLink = function(message) {
+        console.log('http://localhost:37408/api/messages/' + message.Id);
+
+        //get the message id and add it as a parameter of preview.html and copy it to the clipboard
+        copyToClipboard(message.Id);
+
+    };
+
+    function copyToClipboard(text) {
+        var dummy = document.createElement("textarea");
+        // to avoid breaking orgain page when copying more words
+        // cant copy when adding below this code
+        // dummy.style.display = 'none'
+        document.body.appendChild(dummy);
+        //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+        dummy.value = text;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+    }
+
     $scope.showOlder = function () {
         $scope.startIndex += $scope.itemsPerPage;
         $scope.refresh();
@@ -136,7 +157,6 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
         var formatted = escaped.replace(/(https?:\/\/)([-[\]A-Za-z0-9._~:/?#@!$()*+,;=%]|&amp;|&#39;)+/g, '<a href="$&" target="_blank">$&</a>');
         return $sce.trustAsHtml(formatted);
     };
-
 
     $scope.escapeHtml = function (html) {
         var entityMap = {
@@ -231,8 +251,6 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
     }
 });
 
-
-
 papercutApp.directive('targetBlank', function () {
     return {
         link: function (scope, element, attributes) {
@@ -243,9 +261,6 @@ papercutApp.directive('targetBlank', function () {
         }
     };
 });
-
-
-
 
 papercutApp.directive('bodyHtml', ['$sce', '$timeout', function ($sce, $timeout) {
     return {

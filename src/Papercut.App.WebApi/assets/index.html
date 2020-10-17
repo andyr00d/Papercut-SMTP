@@ -17,24 +17,19 @@
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container-fluid">
         <div class="col-md-2 col-sm-3">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-              <img
-                src="images/papercut-logo.png"
-                height="20"
-                alt="Papercut SMTP"
-              />
-            </a>
-          </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="images/papercut-logo.png"
+                         height="20"
+                         alt="Papercut SMTP" />
+                </a>
+            </div>
         </div>
 
         <div class="col-md-10 col-sm-9">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a
-                target="_blank"
-                href="https://github.com/ChangemakerStudios/Papercut-SMTP"
-              >
+              <a target="_blank"href="https://github.com/ChangemakerStudios/Papercut-SMTP">
                 <img src="images/github.png" height="16" alt="GitHub" /> GitHub
               </a>
             </li>
@@ -216,84 +211,81 @@
             </div>
 
             <div class="mail-content">
-              <span class="download-raw pull-right">
-                <a ng-href="api/messages/{{preview.Id}}/raw" target="_blank"
-                  ><span class="glyphicon glyphicon-cloud-download"></span>
-                  Download raw message</a
-                >
-              </span>
-              <ul class="nav nav-tabs">
-                <li
-                  ng-if="hasHTML(preview)"
-                  ng-class="{ active: hasHTML(preview) }"
-                >
-                  <a href="#preview-html" data-toggle="tab">HTML</a>
-                </li>
-                <li
-                  ng-if="hasText(preview)"
-                  ng-class="{ active: !hasHTML(preview) }"
-                >
-                  <a href="#preview-plain" data-toggle="tab">Plain text</a>
-                </li>
-                <li>
-                  <a href="#preview-headers" data-toggle="tab">Headers</a>
-                </li>
-                <li>
-                  <a href="#preview-sections" data-toggle="tab">Sections</a>
-                </li>
-              </ul>
+                <span class="download-raw pull-right">
+                    <a ng-href="api/messages/{{preview.Id}}/raw" target="_blank">
+                        <span class="glyphicon glyphicon-cloud-download"></span>
+                        Download raw message
+                    </a>
+                </span>
 
-              <div class="tab-content">
-                <iframe
-                  target-blank=""
-                  ng-if="hasHTML(preview)"
-                  ng-class="{ active: hasHTML(preview) }"
-                  class="tab-pane"
-                  id="preview-html"
-                  body-html="preview.previewHTML"
-                  content-link-message-id="preview.Id"
-                  seamless
-                  frameborder="0"
-                  style="width: 100%;"
-                ></iframe>
-                <div
-                  class="tab-pane"
-                  ng-class="{ active: !hasHTML(preview) }"
-                  id="preview-plain"
-                  ng-bind-html="formatMessagePlain(preview)"
-                ></div>
-                <div class="tab-pane" id="preview-headers">
-                  <ul>
-                    <li ng-repeat="header in preview.Headers">
-                      <span class="header-name">{{header.Name}}</span>:
-                      {{header.Value}}
+                <button class="download-raw pull-right" style="margin-right: 10px;"
+                        ng-click="getMailLink(preview)"
+                        title="Copy direct sharing link">
+                    <i class="glyphicon glyphicon-link"></i>
+                </button>
+
+                <ul class="nav nav-tabs">
+                    <li ng-if="hasHTML(preview)"
+                        ng-class="{ active: hasHTML(preview) }">
+                        <a href="#preview-html" data-toggle="tab">HTML</a>
                     </li>
-                  </ul>
+                    <li ng-if="hasText(preview)"
+                        ng-class="{ active: !hasHTML(preview) }">
+                        <a href="#preview-plain" data-toggle="tab">Plain text</a>
+                    </li>
+                    <li>
+                        <a href="#preview-headers" data-toggle="tab">Headers</a>
+                    </li>
+                    <li>
+                        <a href="#preview-sections" data-toggle="tab">Sections</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <iframe target-blank=""
+                            ng-if="hasHTML(preview)"
+                            ng-class="{ active: hasHTML(preview) }"
+                            class="tab-pane"
+                            id="preview-html"
+                            body-html="preview.previewHTML"
+                            content-link-message-id="preview.Id"
+                            seamless
+                            frameborder="0"
+                            style="width: 100%;"></iframe>
+                    <div class="tab-pane"
+                         ng-class="{ active: !hasHTML(preview) }"
+                         id="preview-plain"
+                         ng-bind-html="formatMessagePlain(preview)"></div>
+                    <div class="tab-pane" id="preview-headers">
+                        <ul>
+                            <li ng-repeat="header in preview.Headers">
+                                <span class="header-name">{{header.Name}}</span>:
+                                {{header.Value}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="preview-sections">
+                        <table>
+                            <thead>
+                            <th>MEDIA TYPE</th>
+                            <th>FILENAME</th>
+                            <th>SAVE</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="section in preview.Sections">
+                                    <td>{{section.MediaType}}</td>
+                                    <td>{{section.FileName}}</td>
+                                    <td>
+                                        <a title="Download and save section content"
+                                           ng-href="api/messages/{{preview.Id}}/sections/{{$index}}"
+                                           target="_blank"
+                                           class="glyphicon glyphicon-download-alt"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="tab-pane" id="preview-sections">
-                  <table>
-                    <thead>
-                      <th>MEDIA TYPE</th>
-                      <th>FILENAME</th>
-                      <th>SAVE</th>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="section in preview.Sections">
-                        <td>{{section.MediaType}}</td>
-                        <td>{{section.FileName}}</td>
-                        <td>
-                          <a
-                            title="Download and save section content"
-                            ng-href="api/messages/{{preview.Id}}/sections/{{$index}}"
-                            target="_blank"
-                            class="glyphicon glyphicon-download-alt"
-                          ></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
             </div>
           </div>
         </div>

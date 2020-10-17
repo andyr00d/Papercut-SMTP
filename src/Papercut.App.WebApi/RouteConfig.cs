@@ -51,6 +51,10 @@ namespace Papercut.App.WebApi
                 "api/messages/{id}",
                 new {controller = "Messages", action = "Get"});
 
+            //config.Routes.MapHttpRoute("load message preview",
+            //    "api/messages/{id}/preview",
+            //    new { controller = "Messages", action = "Preview" });
+
             config.Routes.MapHttpRoute("download section by content id",
                 "api/messages/{messageId}/contents/{contentId}",
                 new {controller = "Messages", action = "DownloadSectionContent" });
