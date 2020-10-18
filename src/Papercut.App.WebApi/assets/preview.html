@@ -24,7 +24,7 @@
                     //document.getElementById("HtmlBody").innerHTML = xhttp.responseText;
                     console.log(xhttp.responseText.match(new RegExp("<body>" + "(.*)" + "</body>"))[0]);
                     //document.getElementById("preview-html").innerHTML = xhttp.responseText;
-                    //$(xhttp.responseText.match(new RegExp("<body>" + "(.*)" + "</body>"))[0]).appendTo("body");
+                    $(xhttp.responseText.match(new RegExp("<body>" + "(.*)" + "</body>"))[0]).appendTo("body");
 
                 }
             };
