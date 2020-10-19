@@ -92,7 +92,7 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
         console.log('http://localhost:37408/api/messages/' + message.Id);
 
         //get the message id and add it as a parameter of preview.html and copy it to the clipboard
-        copyToClipboard(message.Id);
+        copyToClipboard("http://localhost:37408/preview.html#id=" + message.Id);
 
     };
 
