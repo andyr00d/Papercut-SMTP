@@ -9,38 +9,38 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            console.log("ready!");
-            
-            var messageId = window.location.href.substring(window.location.href.indexOf("=") + 1);
+    <div class="header">
+        <h1>Digital Software Development - Message Preview</h1>
+        <p>When you have finished, please close this browser tab</p>
+    </div>
+    <div class="row headers">
+        <div class="col-md-10">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="header-name">From</td>
+                        <td id="hdrFrom" class="ng-binding"></td>
+                    </tr>
+                    <tr>
+                        <td class="header-name">To</td>
+                        <td id="hdrTo" class="ng-binding"></td>
+                    </tr>
+                    <tr>
+                        <td class="header-name">Date</td>
+                        <td id="hdrDate" class="ng-binding"></td>
+                    </tr>
+                    <tr>
+                        <td class="header-name">Subject</td>
+                        <td><strong id="hdrSubject" class="ng-binding"></strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    
-                    var bodyTextDirty = xhttp.responseText.match(new RegExp("<body>" + "(.*)" + "</body>"))[0];
-                    var bodyTextClean = replaceAllBackSlash(bodyTextDirty);
+    <div id="bodymain" class="col-md-12"></div>
 
-                    function replaceAllBackSlash(targetStr) {
-                        var index = targetStr.indexOf("\\");
-                        while (index >= 0) {
-                            targetStr = targetStr.replace("\\", "");
-                            index = targetStr.indexOf("\\");
-                        }
-                        return targetStr;
-                    }
-
-                    console.log(bodyTextClean);
-                    $(bodyTextClean).appendTo("body");
-
-                }
-            };
-            xhttp.open("GET", 'http://localhost:37408/api/messages/' + messageId, true);
-            xhttp.send();
-        });
-
-    </script>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/preview.js"></script>
 </body>
 </html>

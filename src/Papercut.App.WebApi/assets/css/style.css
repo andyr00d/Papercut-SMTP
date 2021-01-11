@@ -21,7 +21,13 @@ a:focus, a:hover{
   padding-left: 0;
 }
 
-
+.header {
+    padding: 10px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 24px;
+}
 
 /* http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box */
 .left-inner-addon {

@@ -1,6 +1,5 @@
 var papercutApp = angular.module('papercutApp', []);
 
-
 papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $interval) {
 
     $scope.events = {
@@ -9,7 +8,6 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
         eventCount: 0,
         eventsPending: {}
     };
-
 
     $scope.cache = {};
     $scope.itemsPerPage = 50;
@@ -75,7 +73,7 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
         if (typeof (Storage) !== "undefined") {
             localStorage.setItem("itemsPerPage", $scope.itemsPerPage);
         }
-
+        
         $scope.startIndex = 0;
         $scope.refresh();
     };
@@ -89,11 +87,10 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
     };
 
     $scope.getMailLink = function(message) {
-        console.log('http://localhost:37408/api/messages/' + message.Id);
+        console.log(location.hostname + ':37408/api/messages/' + message.Id);
 
         //get the message id and add it as a parameter of preview.html and copy it to the clipboard
-        copyToClipboard("http://localhost:37408/preview.html#id=" + message.Id);
-
+        copyToClipboard(location.hostname + ":37408/preview.html#id=" + message.Id);
     };
 
     function copyToClipboard(text) {
