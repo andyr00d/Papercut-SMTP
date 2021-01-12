@@ -29,6 +29,49 @@ a:focus, a:hover{
     font-size: 24px;
 }
 
+#tooltip {
+    color: black;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    float: right;
+    display: none;
+}
+
+    #tooltip[data-show] {
+        display: block;
+    }
+
+#arrow,
+#arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+}
+
+    #arrow::before {
+        content: '';
+        transform: rotate(45deg);
+        background: #333;
+    }
+
+#tooltip[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+}
+
+#tooltip[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+}
+
+#tooltip[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+}
+
+#tooltip[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+}
+
 /* http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box */
 .left-inner-addon {
   position: relative;
