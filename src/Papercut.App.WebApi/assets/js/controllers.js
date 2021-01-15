@@ -90,7 +90,7 @@ papercutApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout, $int
         console.log(location.hostname + ':37408/api/messages/' + message.Id);
 
         //get the message id and add it as a parameter of preview.html and copy it to the clipboard
-        copyToClipboard(location.hostname + ":37408/preview.html#id=" + message.Id);
+        copyToClipboard("http://" + location.hostname + ":37408/preview.html#id=" + message.Id);
 
         $("#tooltip").show();
         setTimeout(function () {
